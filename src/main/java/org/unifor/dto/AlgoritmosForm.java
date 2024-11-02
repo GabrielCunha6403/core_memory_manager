@@ -5,22 +5,46 @@ import org.unifor.entity.Pagina;
 import java.util.List;
 
 public class AlgoritmosForm {
+    //memoria atual com ou sem conteudo de paginas dentro
     private List<PaginaDTO> memoriaAtual;
-    private List<String> listaElementos;
+    //ordem em que as paginas estão na lista para serem executadas
     private List<PaginaDTO> listaPaginasASeremCarregadas;
-    private int tamanhoPagina;
-    private int tamanhoMaximo;
+    // quais algoritmos executar
+    private List<String> tiposAlgoritmo;
+    // tamanho da lista na memoria
     private int tamanhoMemoria;
     private int tamanhoFilaDePaginas;
 
-    public AlgoritmosForm(List<PaginaDTO> memoriaAtual, int tamanhoFila, int tamanhoMemoria, int tamanhoMaximo, int tamanhoPagina, List<PaginaDTO> listaASerCarregada, List<String> listaElementos) {
+    public AlgoritmosForm(int tamanhoFilaDePaginas, List<PaginaDTO> memoriaAtual, List<PaginaDTO> listaPaginasASeremCarregadas, List<String> tiposAlgoritmo, int tamanhoMemoria) {
+        this.tamanhoFilaDePaginas = tamanhoFilaDePaginas;
         this.memoriaAtual = memoriaAtual;
-        this.tamanhoFilaDePaginas = tamanhoFila;
+        this.listaPaginasASeremCarregadas = listaPaginasASeremCarregadas;
+        this.tiposAlgoritmo = tiposAlgoritmo;
         this.tamanhoMemoria = tamanhoMemoria;
-        this.tamanhoMaximo = tamanhoMaximo;
-        this.tamanhoPagina = tamanhoPagina;
-        this.listaPaginasASeremCarregadas = listaASerCarregada;
-        this.listaElementos = listaElementos;
+    }
+
+    public List<String> getTiposAlgoritmo() {
+        return tiposAlgoritmo;
+    }
+
+    public void setTiposAlgoritmo(List<String> tiposAlgoritmo) {
+        this.tiposAlgoritmo = tiposAlgoritmo;
+    }
+
+    public int getTamanhoFilaDePaginas() {
+        return tamanhoFilaDePaginas;
+    }
+
+    public void setTamanhoFilaDePaginas(int tamanhoFilaDePaginas) {
+        this.tamanhoFilaDePaginas = tamanhoFilaDePaginas;
+    }
+
+    public List<PaginaDTO> getListaPaginasASeremCarregadas() {
+        return listaPaginasASeremCarregadas;
+    }
+
+    public void setListaPaginasASeremCarregadas(List<PaginaDTO> listaPaginasASeremCarregadas) {
+        this.listaPaginasASeremCarregadas = listaPaginasASeremCarregadas;
     }
 
     public List<PaginaDTO> getMemoriaAtual() {
@@ -47,14 +71,6 @@ public class AlgoritmosForm {
         this.tamanhoFilaDePaginas = tamanhoFila;
     }
 
-    public int getTamanhoMaximo() {
-        return tamanhoMaximo;
-    }
-
-    public void setTamanhoMaximo(int tamanhoMaximo) {
-        this.tamanhoMaximo = tamanhoMaximo;
-    }
-
     public List<PaginaDTO> getListaASerCarregada() {
         return listaPaginasASeremCarregadas;
     }
@@ -63,19 +79,4 @@ public class AlgoritmosForm {
         this.listaPaginasASeremCarregadas = listaASerCarregada;
     }
 
-    public int getTamanhoPagina() {
-        return tamanhoPagina;
-    }
-
-    public void setTamanhoPagina(int tamanhoPagina) {
-        this.tamanhoPagina = tamanhoPagina;
-    }
-
-    public List<String> getListaElementos() {
-        return listaElementos;
-    }
-
-    public void setListaElementos(List<String> listaElementos) {
-        this.listaElementos = listaElementos;
-    }
 }

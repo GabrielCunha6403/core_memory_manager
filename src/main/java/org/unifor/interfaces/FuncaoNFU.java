@@ -4,7 +4,9 @@ import org.unifor.dto.AlgoritmosForm;
 import org.unifor.dto.PaginaDTO;
 import org.unifor.dto.ResultAlgoritmoDTO;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class FuncaoNFU implements AlgoritmoInterface<ResultAlgoritmoDTO, AlgoritmosForm> {
@@ -12,19 +14,24 @@ public class FuncaoNFU implements AlgoritmoInterface<ResultAlgoritmoDTO, Algorit
     @Override
     public ResultAlgoritmoDTO processa(AlgoritmosForm form) {
         AtomicInteger countFalta = new AtomicInteger();
-        form.getListaASerCarregada().forEach(elemento -> {
-                if(form.getMemoriaAtual().contains(elemento)) {
-                    form.getMemoriaAtual().get(form.getMemoriaAtual().indexOf(elemento)).acessar();
+        List<PaginaDTO> memoria = new ArrayList<>(form.getMemoriaAtual());
+
+        form.getListaASerCarregada().forEach((elemento) -> {
+
+            Optional<PaginaDTO> p =  memoria.stream().filter(x -> x.getValue().equals(elemento.getValue())).findFirst();
+
+            if(p.isPresent()) {
+                memoria.get(memoria.indexOf(p.get())).acessar();
+            } else {
+                if(form.getTamanhoMemoria() == memoria.size()) {
+                    int id = memoria.indexOf(buscaPaginaMenosAcessada(memoria));
+                    memoria.remove(id);
+                    memoria.add(id,elemento);
                 } else {
-                    if(form.getTamanhoMemoria() <= form.getMemoriaAtual().size()) {
-                        int id = form.getMemoriaAtual().indexOf(buscaPaginaMenosAcessada(form.getMemoriaAtual()));
-                        form.getMemoriaAtual().remove(id);
-                        form.getMemoriaAtual().add(id,elemento);
-                    } else {
-                        form.getMemoriaAtual().add(elemento);
-                    }
-                    countFalta.getAndIncrement();
+                    memoria.add(elemento);
                 }
+                countFalta.getAndIncrement();
+            }
 
         });
 

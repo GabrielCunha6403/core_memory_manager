@@ -11,9 +11,10 @@ import org.unifor.util.EnumUtil;
 public class AlgoritmosService {
 
     public void compilarAlgoritmos(AlgoritmosForm algoritmosForm) {
-        ResultAlgoritmoDTO paginaDTO = EnumUtil.getEnumByField(TipoAlgoritmo.class,"tipo", "nfuz").getFuncao().processa(algoritmosForm);
-        System.out.println(paginaDTO.getQtdFalta());
+        algoritmosForm.getTiposAlgoritmo().forEach(tipos -> {
+            System.out.println(tipos);
+            ResultAlgoritmoDTO paginaDTO = EnumUtil.getEnumByField(TipoAlgoritmo.class,"tipo", tipos).getFuncao().processa(algoritmosForm);
+            System.out.println(paginaDTO.getQtdFalta());
+        });
     }
-
-
 }
