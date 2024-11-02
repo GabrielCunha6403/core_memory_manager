@@ -8,10 +8,17 @@ public class PaginaDTO {
     private String tipo;
 
 
-    public PaginaDTO(String value, String tipo) {
+    public PaginaDTO(String value) {
         this.qtdFaltas = 0;
         this.value = value;
         this.qtdAcesso = 0;
+        this.tipo = "";
+    }
+
+    public PaginaDTO(int qtdFaltas, String value, int qtdAcesso, String tipo) {
+        this.qtdFaltas = qtdFaltas;
+        this.value = value;
+        this.qtdAcesso = qtdAcesso;
         this.tipo = tipo;
     }
 

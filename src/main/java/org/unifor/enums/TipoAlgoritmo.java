@@ -1,15 +1,14 @@
 package org.unifor.enums;
 
 import org.unifor.dto.AlgoritmosForm;
-import org.unifor.dto.PaginaDTO;
 import org.unifor.dto.ResultAlgoritmoDTO;
 import org.unifor.interfaces.AlgoritmoInterface;
-import org.unifor.interfaces.FuncaoFiFo;
+import org.unifor.interfaces.FuncaoFIFO;
 import org.unifor.interfaces.FuncaoNFU;
 
 public enum TipoAlgoritmo {
 
-    FIFO("fifo", new FuncaoFiFo()),
+    FIFO("fifo", new FuncaoFIFO()),
     NFU("nfu", new FuncaoNFU());
 
 

@@ -5,17 +5,22 @@ import org.unifor.entity.FiFoList;
 import org.unifor.dto.PaginaDTO;
 import org.unifor.dto.ResultAlgoritmoDTO;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class FuncaoFiFo implements AlgoritmoInterface<ResultAlgoritmoDTO, AlgoritmosForm>{
+public class FuncaoFIFO implements AlgoritmoInterface<ResultAlgoritmoDTO, AlgoritmosForm>{
 
 
     @Override
     public ResultAlgoritmoDTO processa(AlgoritmosForm form) {
-        FiFoList<PaginaDTO> fifo = new FiFoList<PaginaDTO>(form.getMemoriaAtual(), form.getTamanhoMaximo());
+        List<PaginaDTO> pages = new ArrayList<>(form.getMemoriaAtual());
+        FiFoList<PaginaDTO> fifo = new FiFoList<PaginaDTO>(pages, form.getTamanhoMemoria());
         AtomicInteger countFalta = new AtomicInteger();
         form.getListaASerCarregada().forEach(items -> {
-            if(!(fifo.getListElements().contains(items))) {
+            Optional<PaginaDTO> p = fifo.getListElements().stream().filter(item -> item.getValue().equals(items.getValue())).findFirst();
+            if(p.isEmpty()) {
                 if(fifo.listaCheia()) {
                     fifo.remover();
                 }
