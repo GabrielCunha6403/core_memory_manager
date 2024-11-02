@@ -46,7 +46,7 @@ public class FiFoList<T> {
             throw new IllegalStateException("Fila cheia");
         }
         this.listElements.add(this.fim, valor);
-        this.fim = (this.fim + 1) % this.listElements.size();
+        this.fim = (this.fim + 1) % maxSize;
     }
 
     public void remover() {
@@ -54,7 +54,7 @@ public class FiFoList<T> {
             throw new IllegalStateException("Fila vazia");
         }
         this.listElements.remove(this.inicio);
-        this.inicio = (this.inicio + 1) % this.listElements.size();
+        this.inicio = (this.inicio + 1) % maxSize;
     }
 
     public boolean listaCheia() {

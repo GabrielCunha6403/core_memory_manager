@@ -15,11 +15,11 @@ public class PaginaDTO {
         this.tipo = "";
     }
 
-    public PaginaDTO(int qtdFaltas, String value, int qtdAcesso, String tipo) {
+    public PaginaDTO(int qtdFaltas, String tipo, int qtdAcesso, String value) {
         this.qtdFaltas = qtdFaltas;
-        this.value = value;
-        this.qtdAcesso = qtdAcesso;
         this.tipo = tipo;
+        this.qtdAcesso = qtdAcesso;
+        this.value = value;
     }
 
     public String getValue() {
