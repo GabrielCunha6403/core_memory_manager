@@ -1,17 +1,18 @@
 package org.unifor.interfaces;
 
 import org.unifor.dto.AlgoritmosForm;
-import org.unifor.dto.FiFoList;
+import org.unifor.entity.FiFoList;
 import org.unifor.dto.PaginaDTO;
+import org.unifor.dto.ResultAlgoritmoDTO;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class FuncaoFiFo implements AlgoritmoInterface<PaginaDTO, AlgoritmosForm>{
+public class FuncaoFiFo implements AlgoritmoInterface<ResultAlgoritmoDTO, AlgoritmosForm>{
 
 
     @Override
-    public PaginaDTO processa(AlgoritmosForm form) {
-        FiFoList<Integer> fifo = new FiFoList<Integer>(form.getListaElementos(), form.getTamanhoMaximo());
+    public ResultAlgoritmoDTO processa(AlgoritmosForm form) {
+        FiFoList<PaginaDTO> fifo = new FiFoList<PaginaDTO>(form.getMemoriaAtual(), form.getTamanhoMaximo());
         AtomicInteger countFalta = new AtomicInteger();
         form.getListaASerCarregada().forEach(items -> {
             if(!(fifo.getListElements().contains(items))) {
@@ -23,11 +24,7 @@ public class FuncaoFiFo implements AlgoritmoInterface<PaginaDTO, AlgoritmosForm>
             }
         });
 
-        return new PaginaDTO("teste", countFalta.get());
-    }
-
-    public void adicionarElementoLista() {
-
+        return new ResultAlgoritmoDTO(countFalta.get());
     }
 
 }

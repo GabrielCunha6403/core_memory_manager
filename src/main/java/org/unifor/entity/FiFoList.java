@@ -1,4 +1,4 @@
-package org.unifor.dto;
+package org.unifor.entity;
 
 import java.util.List;
 
