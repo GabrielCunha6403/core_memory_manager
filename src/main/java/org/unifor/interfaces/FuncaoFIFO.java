@@ -4,6 +4,7 @@ import org.unifor.dto.AlgoritmosForm;
 import org.unifor.entity.FiFoList;
 import org.unifor.dto.PaginaDTO;
 import org.unifor.dto.ResultAlgoritmoDTO;
+import org.unifor.enums.TipoAlgoritmo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +30,7 @@ public class FuncaoFIFO implements AlgoritmoInterface<ResultAlgoritmoDTO, Algori
             }
         });
 
-        return new ResultAlgoritmoDTO(countFalta.get());
+        return new ResultAlgoritmoDTO(countFalta.get(), TipoAlgoritmo.FIFO);
     }
 
 }

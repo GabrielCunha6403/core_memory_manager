@@ -4,7 +4,10 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import org.unifor.dto.AlgoritmosForm;
+import org.unifor.dto.ResultAlgoritmoDTO;
 import org.unifor.service.AlgoritmosService;
+
+import java.util.List;
 
 @Path("/processar")
 public class AlgoritmoResource {
@@ -17,9 +20,8 @@ public class AlgoritmoResource {
 
     @POST
     @Path("/processa")
-    public void teste(AlgoritmosForm algoritmosForm) {
-        algoritmosService.compilarAlgoritmos(algoritmosForm);
+    public List<ResultAlgoritmoDTO> teste(AlgoritmosForm algoritmosForm) {
+        return algoritmosService.compilarAlgoritmos(algoritmosForm);
     }
-
 
 }
