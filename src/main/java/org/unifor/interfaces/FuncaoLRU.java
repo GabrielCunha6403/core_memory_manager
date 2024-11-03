@@ -24,7 +24,7 @@ public class FuncaoLRU implements AlgoritmoInterface<ResultAlgoritmoDTO, Algorit
             Optional<PaginaDTO> pagina = memoria.stream().filter(x -> x.getValue().equals(p.getValue())).findFirst();
             if (pagina.isEmpty()) {
                 if(memoria.size() == form.getTamanhoMemoria()) {
-                    memoria.set(memoriasAcessadas.getLast(), p);
+                    memoria.set(memoriasAcessadas.getFirst(), p);
                 } else {
                     memoria.add(p);
                 }

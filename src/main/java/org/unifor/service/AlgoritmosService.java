@@ -7,13 +7,15 @@ import org.unifor.dto.ResultAlgoritmoDTO;
 import org.unifor.enums.TipoAlgoritmo;
 import org.unifor.util.EnumUtil;
 
+import java.util.Objects;
+
 @ApplicationScoped
 public class AlgoritmosService {
 
     public void compilarAlgoritmos(AlgoritmosForm algoritmosForm) {
         algoritmosForm.getTiposAlgoritmo().forEach(tipos -> {
             System.out.println(tipos);
-            ResultAlgoritmoDTO paginaDTO = EnumUtil.getEnumByField(TipoAlgoritmo.class,"tipo", tipos).getFuncao().processa(algoritmosForm);
+            ResultAlgoritmoDTO paginaDTO = Objects.requireNonNull(EnumUtil.getEnumByField(TipoAlgoritmo.class, "tipo", tipos)).getFuncao().processa(algoritmosForm);
             System.out.println(paginaDTO.getQtdFalta());
         });
     }

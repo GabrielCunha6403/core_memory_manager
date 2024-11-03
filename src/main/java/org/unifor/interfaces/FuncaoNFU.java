@@ -5,6 +5,7 @@ import org.unifor.dto.PaginaDTO;
 import org.unifor.dto.ResultAlgoritmoDTO;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -18,15 +19,10 @@ public class FuncaoNFU implements AlgoritmoInterface<ResultAlgoritmoDTO, Algorit
 
         form.getListaASerCarregada().forEach((elemento) -> {
 
-            Optional<PaginaDTO> p =  memoria.stream().filter(x -> x.getValue().equals(elemento.getValue())).findFirst();
-
-            if(p.isPresent()) {
-                memoria.get(memoria.indexOf(p.get())).acessar();
-            } else {
+            if(fazerAcessoDeElementosMemoria(memoria, elemento)) {
                 if(form.getTamanhoMemoria() == memoria.size()) {
                     int id = memoria.indexOf(buscaPaginaMenosAcessada(memoria));
-                    memoria.remove(id);
-                    memoria.add(id,elemento);
+                    memoria.set(id,elemento);
                 } else {
                     memoria.add(elemento);
                 }
@@ -38,11 +34,17 @@ public class FuncaoNFU implements AlgoritmoInterface<ResultAlgoritmoDTO, Algorit
         return new ResultAlgoritmoDTO(countFalta.get());
     }
 
-    public PaginaDTO buscaPaginaMenosAcessada(List<PaginaDTO> memoria) {
-        PaginaDTO p  = memoria.getFirst();
-        for(PaginaDTO dto : memoria) {
-           p = dto.getQtdAcesso() > p.getQtdAcesso() ? p : dto;
+    boolean fazerAcessoDeElementosMemoria(List<PaginaDTO> list, PaginaDTO paginaDTO) {
+        for(PaginaDTO x : list) {
+            if(x.getValue().trim().equalsIgnoreCase(paginaDTO.getValue().trim())) {
+                x.acessar();
+                return false;
+            };
         }
-        return p;
+        return true;
+    }
+
+    public PaginaDTO buscaPaginaMenosAcessada(List<PaginaDTO> memoria) {
+        return memoria.stream().min(Comparator.comparingInt(PaginaDTO::getQtdAcesso)).orElseThrow();
     }
 }

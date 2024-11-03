@@ -39,7 +39,7 @@ public class PaginaDTO {
     }
 
     public void acessar() {
-        qtdAcesso = qtdAcesso + 1;
+        qtdAcesso++;
     }
 
 
