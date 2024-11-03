@@ -2,16 +2,14 @@ package org.unifor.enums;
 
 import org.unifor.dto.AlgoritmosForm;
 import org.unifor.dto.ResultAlgoritmoDTO;
-import org.unifor.interfaces.AlgoritmoInterface;
-import org.unifor.interfaces.FuncaoFIFO;
-import org.unifor.interfaces.FuncaoLRU;
-import org.unifor.interfaces.FuncaoNFU;
+import org.unifor.interfaces.*;
 
 public enum TipoAlgoritmo {
 
     FIFO("fifo", new FuncaoFIFO()),
     NFU("nfu", new FuncaoNFU()),
-    LRU("lru", new FuncaoLRU());
+    LRU("lru", new FuncaoLRU()),
+    CLK("clk", new FuncaoClock());
 
     private String tipo;
     private AlgoritmoInterface<ResultAlgoritmoDTO, AlgoritmosForm> funcao;

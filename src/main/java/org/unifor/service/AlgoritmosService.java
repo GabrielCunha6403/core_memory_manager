@@ -17,10 +17,8 @@ public class AlgoritmosService {
     public List<ResultAlgoritmoDTO> compilarAlgoritmos(AlgoritmosForm algoritmosForm) {
         List<ResultAlgoritmoDTO> result = new ArrayList<>();
         algoritmosForm.getTiposAlgoritmo().forEach(tipos -> {
-            System.out.println(tipos);
             ResultAlgoritmoDTO paginaDTO = Objects.requireNonNull(EnumUtil.getEnumByField(TipoAlgoritmo.class, "tipo", tipos)).getFuncao().processa(algoritmosForm);
             result.add(paginaDTO);
-            System.out.println(paginaDTO.getQtdFalta());
         });
         return result;
     }
