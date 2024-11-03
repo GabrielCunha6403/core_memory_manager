@@ -22,15 +22,12 @@ public class FuncaoNFU implements AlgoritmoInterface<ResultAlgoritmoDTO, Algorit
             if(fazerAcessoDeElementosMemoria(memoria, elemento)) {
                 if(form.getTamanhoMemoria() == memoria.size()) {
                     int id = memoria.indexOf(buscaPaginaMenosAcessada(memoria));
-                    elemento.acessar();
                     memoria.set(id,elemento);
                 } else {
-                    elemento.acessar();
                     memoria.add(elemento);
                 }
                 countFalta.getAndIncrement();
             }
-
 
         });
 
@@ -39,7 +36,7 @@ public class FuncaoNFU implements AlgoritmoInterface<ResultAlgoritmoDTO, Algorit
 
     boolean fazerAcessoDeElementosMemoria(List<PaginaDTO> list, PaginaDTO paginaDTO) {
         for(PaginaDTO x : list) {
-            if(x.getValue().equals(paginaDTO.getValue())) {
+            if(x.getValue().trim().equalsIgnoreCase(paginaDTO.getValue().trim())) {
                 x.acessar();
                 return false;
             };
