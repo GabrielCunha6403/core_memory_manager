@@ -3,6 +3,8 @@ package org.unifor.interfaces;
 import org.unifor.dto.AlgoritmosForm;
 import org.unifor.dto.PaginaDTO;
 import org.unifor.dto.ResultAlgoritmoDTO;
+import org.unifor.enums.TipoAlgoritmo;
+import org.unifor.util.ListaUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,33 +30,13 @@ public class FuncaoLRU implements AlgoritmoInterface<ResultAlgoritmoDTO, Algorit
                 } else {
                     memoria.add(p);
                 }
-                memoriasAcessadas = mapearParaListaDeIndex(memoria);
-                inverterList(memoriasAcessadas);
+                memoriasAcessadas = ListaUtil.mapearParaListaDeIndex(memoria);
+                ListaUtil.inverterList(memoriasAcessadas);
                 faltas.getAndIncrement();
             }
         }
 
-        return new ResultAlgoritmoDTO(faltas.get());
+        return new ResultAlgoritmoDTO(faltas.get(), TipoAlgoritmo.LRU);
     }
 
-    public void inverterList(List<Integer> list) {
-        int ponteiroEsquerda = 0;
-        int ponteiroDireita = list.size() - 1;
-
-        while (ponteiroDireita > ponteiroEsquerda) {
-            Integer value = list.get(ponteiroEsquerda);
-            list.set(ponteiroEsquerda, list.get(ponteiroDireita));
-            list.set(ponteiroDireita, value);
-            ponteiroEsquerda++;
-            ponteiroDireita--;
-        }
-    }
-
-    public List<Integer> mapearParaListaDeIndex(List<PaginaDTO> lista) {
-        List<Integer> list = new ArrayList<>();
-        for(int i = 0; i < lista.size(); i++) {
-            list.add(i);
-        }
-        return list;
-    }
 }

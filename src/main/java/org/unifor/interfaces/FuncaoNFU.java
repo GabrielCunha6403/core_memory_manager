@@ -3,6 +3,7 @@ package org.unifor.interfaces;
 import org.unifor.dto.AlgoritmosForm;
 import org.unifor.dto.PaginaDTO;
 import org.unifor.dto.ResultAlgoritmoDTO;
+import org.unifor.enums.TipoAlgoritmo;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -31,7 +32,7 @@ public class FuncaoNFU implements AlgoritmoInterface<ResultAlgoritmoDTO, Algorit
 
         });
 
-        return new ResultAlgoritmoDTO(countFalta.get());
+        return new ResultAlgoritmoDTO(countFalta.get(), TipoAlgoritmo.NFU);
     }
 
     boolean fazerAcessoDeElementosMemoria(List<PaginaDTO> list, PaginaDTO paginaDTO) {
