@@ -17,8 +17,7 @@ public class GenerateUtil {
 
         int qtdDeValores = random.nextInt(101) + 1;
 
-        if(numeroAleatorio <= 1) {
-
+        if(numeroAleatorio == 1) {
            for(int i = 0; i < qtdDeValores; i++) {
                valores.add(new PaginaDTO(
                        0,
@@ -30,11 +29,12 @@ public class GenerateUtil {
 
         } else if(numeroAleatorio == 2) {
             for(int i = 0; i < qtdDeValores; i++) {
+                char letra = (char) (random.nextInt(26) + 'a');
                 valores.add(new PaginaDTO(
                         0,
                         "",
                         0,
-                        String.valueOf( random.nextInt(26) + 'a').toUpperCase()
+                        String.valueOf( letra ).toUpperCase()
                 ));
             }
         } else {
@@ -43,7 +43,7 @@ public class GenerateUtil {
                         0,
                         "",
                         0,
-                        random.nextBoolean() ?String.valueOf(random.nextInt(10)) : String.valueOf(random.nextInt(26) + 'a').toUpperCase()
+                        random.nextBoolean() ? String.valueOf(random.nextInt(10)) : String.valueOf((char) random.nextInt(26) + 'a').toUpperCase()
                 ));
             }
         }
