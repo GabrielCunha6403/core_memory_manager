@@ -32,7 +32,7 @@ public class FuncaoNFU implements AlgoritmoInterface<ResultAlgoritmoDTO, Algorit
 
         });
 
-        return new ResultAlgoritmoDTO(countFalta.get(), TipoAlgoritmo.NFU);
+        return new ResultAlgoritmoDTO(countFalta.get(), TipoAlgoritmo.NFU,form.getListaASerCarregada().size(), form.getListaASerCarregada().stream().map(PaginaDTO:: getValue).toList());
     }
 
     boolean fazerAcessoDeElementosMemoria(List<PaginaDTO> list, PaginaDTO paginaDTO) {

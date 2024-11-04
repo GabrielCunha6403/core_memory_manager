@@ -26,8 +26,7 @@ public class FuncaoClock implements AlgoritmoInterface<ResultAlgoritmoDTO, Algor
             }
         });
 
-
-        return new ResultAlgoritmoDTO(countFalta.get(), TipoAlgoritmo.CLK);
+        return new ResultAlgoritmoDTO(countFalta.get(), TipoAlgoritmo.CLK, form.getListaASerCarregada().size(), form.getListaASerCarregada().stream().map(PaginaDTO::getValue).toList());
     }
 
     public PaginaDTO retornarPaginaComBitDiferente0(List<PaginaDTO> lista) {
