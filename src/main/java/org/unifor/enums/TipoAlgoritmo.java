@@ -8,7 +8,7 @@ public enum TipoAlgoritmo {
 
     FIFO("fifo", new FuncaoFIFO()),
     NFU("nfu", new FuncaoNFU()),
-    CLK("clk", new FuncaoClock()),
+    CLOCK("clk", new FuncaoClock()),
     AGING("ag", new FuncaoAging()),
     LRU("lru", new FuncaoLRU());
 

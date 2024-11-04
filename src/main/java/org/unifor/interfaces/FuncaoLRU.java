@@ -19,7 +19,8 @@ public class FuncaoLRU implements AlgoritmoInterface<ResultAlgoritmoDTO, Algorit
     @Override
     public ResultAlgoritmoDTO processa(AlgoritmosForm form) {
         List<PaginaDTO> memoria = new ArrayList<>(form.getMemoriaAtual());
-        List<Integer> memoriasAcessadas = new ArrayList<>();
+        List<Integer> memoriasAcessadas = ListaUtil.mapearParaListaDeIndex(memoria);
+        ListaUtil.inverterList(memoriasAcessadas);
         AtomicInteger faltas = new AtomicInteger();
 
         for (PaginaDTO p : form.getListaASerCarregada()) {
