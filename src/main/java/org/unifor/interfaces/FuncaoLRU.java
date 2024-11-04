@@ -36,7 +36,7 @@ public class FuncaoLRU implements AlgoritmoInterface<ResultAlgoritmoDTO, Algorit
             }
         }
 
-        return new ResultAlgoritmoDTO(faltas.get(), TipoAlgoritmo.LRU);
+        return new ResultAlgoritmoDTO(faltas.get(), TipoAlgoritmo.LRU, form.getListaASerCarregada().size(), form.getListaASerCarregada().stream().map(PaginaDTO:: getValue).toList());
     }
 
 }

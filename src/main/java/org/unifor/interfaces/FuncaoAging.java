@@ -3,6 +3,7 @@ package org.unifor.interfaces;
 import org.unifor.dto.AlgoritmosForm;
 import org.unifor.dto.PaginaDTO;
 import org.unifor.dto.ResultAlgoritmoDTO;
+import org.unifor.enums.TipoAlgoritmo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +61,7 @@ public class FuncaoAging implements  AlgoritmoInterface<ResultAlgoritmoDTO, Algo
             }
         }
 
-        return  new ResultAlgoritmoDTO(pageFaults);
+        return  new ResultAlgoritmoDTO(pageFaults, TipoAlgoritmo.AGING , form.getListaASerCarregada().size(), form.getListaASerCarregada().stream().map(PaginaDTO::getValue).toList());
     }
 }
+

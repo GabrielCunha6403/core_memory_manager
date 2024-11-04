@@ -30,7 +30,7 @@ public class FuncaoFIFO implements AlgoritmoInterface<ResultAlgoritmoDTO, Algori
             }
         });
 
-        return new ResultAlgoritmoDTO(countFalta.get(), TipoAlgoritmo.FIFO);
+        return new ResultAlgoritmoDTO(countFalta.get(), TipoAlgoritmo.FIFO, form.getListaASerCarregada().size(), form.getListaASerCarregada().stream().map(PaginaDTO::getValue).toList());
     }
 
 }
